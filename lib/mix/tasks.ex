@@ -128,6 +128,24 @@ defmodule Mix.Tasks.Coveralls do
     end
   end
 
+  defmodule CustomJson do
+    @moduledoc """
+    Provides an entry point for outputting coveralls information
+    as a JSON file.
+    """
+    use Mix.Task
+
+    @shortdoc "Output the test coverage as a JSON file"
+
+    def run(args) do
+      {parsed, _, _} = OptionParser.parse(args, aliases: [f: :filter])
+
+      Mix.Tasks.Coveralls.do_run(args,
+        [ type: "custom_json",
+          filter: parsed[:filter] || [] ])
+    end
+  end
+
   defmodule Travis do
     @moduledoc """
     Provides an entry point for travis's script.

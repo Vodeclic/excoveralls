@@ -13,6 +13,7 @@ defmodule ExCoveralls do
   alias ExCoveralls.Local
   alias ExCoveralls.Html
   alias ExCoveralls.Json
+  alias ExCoveralls.CustomJson
   alias ExCoveralls.Post
 
   @type_travis      "travis"
@@ -21,6 +22,7 @@ defmodule ExCoveralls do
   @type_local       "local"
   @type_html        "html"
   @type_json        "json"
+  @type_custom_json "custom_json"
   @type_post        "post"
 
   @doc """
@@ -90,6 +92,13 @@ defmodule ExCoveralls do
   """
   def analyze(stats, @type_json, options) do
     Json.execute(stats, options)
+  end
+
+  @doc """
+  Logic for Local+JSON output, without posting server
+  """
+  def analyze(stats, @type_custom_json, options) do
+    CustomJson.execute(stats, options)
   end
 
   @doc """
